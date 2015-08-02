@@ -8,6 +8,12 @@
   });
   var segundosDesde = (Date.now() - new Date(args["s"])) / 1000;
   var duracaoEmSegundos = parseInt(args["d"]);
+  var text = args["t"];
+  delete args["t"];
+  args["q"] = Math.floor(segundosDesde / duracaoEmSegundos);
 
-  document.body.innerText = Math.floor(segundosDesde / duracaoEmSegundos);
+  for (p in args) {
+    text = text.replace("{" + p + "}", args[p]);
+  }
+  document.body.innerText = text;
 </script>
