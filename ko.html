@@ -1,0 +1,13 @@
+<html></html>
+<script type="text/javascript">
+  var queryString = decodeURIComponent(location.search.substring(1)).split("&");
+  var args = {};
+  queryString.forEach(function(x) {
+    pos = x.indexOf("=");
+    args[x.substring(0, pos)] = x.substring(pos + 1);
+  });
+  var segundosDesde = (Date.now() - new Date(args["s"])) / 1000;
+  var duracaoEmSegundos = parseInt(args["d"]);
+
+  document.body.innerText = Math.floor(segundosDesde / duracaoEmSegundos);
+</script>
