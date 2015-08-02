@@ -20,7 +20,7 @@
   document.body.innerText = text;
 
   window.setTimeout(
-    function() { window.location.reload();},
+    function() { document.location.reload();},
     duracaoEmMilissegundos - milissegundosDesde % duracaoEmMilissegundos
   );
 })();
