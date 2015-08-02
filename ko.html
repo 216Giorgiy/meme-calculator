@@ -8,15 +8,20 @@
     var pos = x.indexOf("=");
     args[x.substring(0, pos)] = x.substring(pos + 1);
   });
-  var segundosDesde = (Date.now() - new Date(args["s"])) / 1000;
-  var duracaoEmSegundos = parseInt(args["d"]);
+  var milissegundosDesde = (Date.now() - new Date(args["s"]));
+  var duracaoEmMilissegundos = parseInt(args["d"]) * 1000;
   var text = args["t"];
   delete args["t"];
-  args["q"] = Math.floor(segundosDesde / duracaoEmSegundos);
+  args["q"] = Math.floor(milissegundosDesde / duracaoEmMilissegundos);
 
   for (var p in args) {
     text = text.replace("{" + p + "}", args[p]);
   }
   document.body.innerText = text;
+
+  window.setTimeout(
+    function() { window.location.reload();},
+    duracaoEmMilissegundos - milissegundosDesde % duracaoEmMilissegundos
+  );
 })();
 </script>
