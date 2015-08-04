@@ -1,10 +1,24 @@
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     img {
       vertical-align: middle;
     }
   </style>
+  <!-- Google Analytics -->
+  <script>
+  if (location.protocol !== "file:"){
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-61202332-9', 'auto');
+    ga('send', 'pageview');
+}
+  </script>
+  <!-- End Google Analytics -->
 </head>
 <body>
 <script type="text/javascript">
@@ -16,6 +30,9 @@
     var pos = x.indexOf("=");
     args[x.substring(0, pos)] = x.substring(pos + 1);
   });
+
+  document.title = args["team1"] + " x " + args["team2"];
+
   var milissegundosDesde = (Date.now() - new Date(args["start"]));
   var duracaoEmMilissegundos = parseInt(args["duration"]) * 1000;
   var text = args["text"];
@@ -29,11 +46,11 @@
   var line1 = document.createElement("p");
   line1.appendChild(document.createTextNode(text));
 
-  var line2 = document.createElement("h1");
+  var line2 = document.createElement("p");
   if ("flag1" in args) {
     var img = document.createElement("img");
     img.src = args["flag1"];
-    img.width = 64;
+    img.width = 32;
     line2.appendChild(img);
   }
   line2.appendChild(document.createTextNode(" " + args["team1"] + ": " + currentScore1 + " x "));
@@ -41,18 +58,13 @@
   if ("flag2" in args) {
     var img = document.createElement("img");
     img.src = args["flag2"];
-    img.width = 64;
+    img.width = 32;
     line2.appendChild(img);
   }
   line2.appendChild(document.createTextNode(" " + args["team2"] + ": "+ currentScore2));
 
   document.body.appendChild(line1);
   document.body.appendChild(line2);
-
-  window.setTimeout(
-    function() { document.location.reload();},
-    duracaoEmMilissegundos - milissegundosDesde % duracaoEmMilissegundos
-  );
 })();
 </script>
 </body>
