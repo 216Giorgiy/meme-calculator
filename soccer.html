@@ -1,0 +1,59 @@
+<html>
+<head>
+  <style>
+    img {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<script type="text/javascript">
+(function() {
+  "use strict";
+  var queryString = decodeURIComponent(location.search.substring(1)).split("&");
+  var args = {};
+  queryString.forEach(function(x) {
+    var pos = x.indexOf("=");
+    args[x.substring(0, pos)] = x.substring(pos + 1);
+  });
+  var milissegundosDesde = (Date.now() - new Date(args["start"]));
+  var duracaoEmMilissegundos = parseInt(args["duration"]) * 1000;
+  var text = args["text"];
+
+  var score1 = parseInt(args["score1"]);
+  var score2 = parseInt(args["score2"]);
+  var gamesSince = milissegundosDesde / duracaoEmMilissegundos
+  var currentScore1 = Math.floor(score1 * gamesSince);
+  var currentScore2 = Math.floor(score2 * gamesSince);
+
+  var line1 = document.createElement("p");
+  line1.appendChild(document.createTextNode(text));
+
+  var line2 = document.createElement("h1");
+  if ("flag1" in args) {
+    var img = document.createElement("img");
+    img.src = args["flag1"];
+    img.width = 64;
+    line2.appendChild(img);
+  }
+  line2.appendChild(document.createTextNode(" " + args["team1"] + ": " + currentScore1 + " x "));
+
+  if ("flag2" in args) {
+    var img = document.createElement("img");
+    img.src = args["flag2"];
+    img.width = 64;
+    line2.appendChild(img);
+  }
+  line2.appendChild(document.createTextNode(" " + args["team2"] + ": "+ currentScore2));
+
+  document.body.appendChild(line1);
+  document.body.appendChild(line2);
+
+  window.setTimeout(
+    function() { document.location.reload();},
+    duracaoEmMilissegundos - milissegundosDesde % duracaoEmMilissegundos
+  );
+})();
+</script>
+</body>
+</html>
