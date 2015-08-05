@@ -21,6 +21,13 @@
   <!-- End Google Analytics -->
 </head>
 <body>
+  <p id="text">
+  <p>
+    <table><tbody>
+      <tr><td id="flag1"></td><td id="team1" style="text-align:center"></td><td id="currentScore1" style="text-align:right"></td></tr>
+      <tr><td colspan="3" style="text-align:center">X</td></tr>
+      <tr><td id="flag2"></td><td id="team2" style="text-align:center"></td><td id="currentScore2" style="text-align:right"></td></tr>
+    </tbody></table>
 <script type="text/javascript">
 (function() {
   "use strict";
@@ -33,38 +40,27 @@
 
   document.title = args["team1"] + " x " + args["team2"];
 
-  var milissegundosDesde = (Date.now() - new Date(args["start"]));
-  var duracaoEmMilissegundos = parseInt(args["duration"]) * 1000;
-  var text = args["text"];
+  var gamesSince = (Date.now() - new Date(args["start"])) / (parseInt(args["duration"]) * 1000);
 
-  var score1 = parseInt(args["score1"]);
-  var score2 = parseInt(args["score2"]);
-  var gamesSince = milissegundosDesde / duracaoEmMilissegundos
-  var currentScore1 = Math.floor(score1 * gamesSince);
-  var currentScore2 = Math.floor(score2 * gamesSince);
+  document.getElementById("text").appendChild(document.createTextNode(args["text"]));
 
-  var line1 = document.createElement("p");
-  line1.appendChild(document.createTextNode(text));
-
-  var line2 = document.createElement("p");
   if ("flag1" in args) {
     var img = document.createElement("img");
     img.src = args["flag1"];
     img.width = 32;
-    line2.appendChild(img);
+    document.getElementById("flag1").appendChild(img);
   }
-  line2.appendChild(document.createTextNode(" " + args["team1"] + ": " + currentScore1 + " x "));
+  document.getElementById("team1").appendChild(document.createTextNode(args["team1"]));
+  document.getElementById("currentScore1").appendChild(document.createTextNode(Math.floor(parseInt(args["score1"]) * gamesSince)));
 
   if ("flag2" in args) {
     var img = document.createElement("img");
     img.src = args["flag2"];
     img.width = 32;
-    line2.appendChild(img);
+    document.getElementById("flag2").appendChild(img);
   }
-  line2.appendChild(document.createTextNode(" " + args["team2"] + ": "+ currentScore2));
-
-  document.body.appendChild(line1);
-  document.body.appendChild(line2);
+  document.getElementById("team2").appendChild(document.createTextNode(args["team2"]));
+  document.getElementById("currentScore2").appendChild(document.createTextNode(Math.floor(parseInt(args["score2"]) * gamesSince)));
 })();
 </script>
 </body>
