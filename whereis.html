@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Where is?</title>
   <!-- Google Analytics -->
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -44,16 +43,25 @@
     });
 
     var tweets = document.getElementById("tweets");
+    var setTitle = function(frame) {
+      if (document.title) {
+        return;
+      }
+      document.title = "Where is " + frame.contentWindow.document.getElementsByClassName("Tweet-authorName Identity-name p-name customisable-highlight")[0].innerText + "?";
+    };
     if (typeof args["tweet"] === "string") {
-      twttr.widgets.createTweet(args["tweet"], tweets, {align: 'left'});
+      twttr.widgets.createTweet(args["tweet"], tweets, {align: 'left'})
+      .then(setTitle);
     }
     else {
       for (var i = 0; i < args["tweet"].length; i++) {
         var div = document.createElement("div");
         tweets.appendChild(div);
-        twttr.widgets.createTweet(args["tweet"][i], div, {align: 'left'});
+        twttr.widgets.createTweet(args["tweet"][i], div, {align: 'left'}).then(setTitle);
       }
     }
+
+    document.getElementById("mapFrame").src = "https://www.google.com/maps/embed?pb=" + args["pb"];
   });
 </script>
 
@@ -61,8 +69,8 @@
 <body>
   <div id="tweets"></div>
   <div id="map-canvas">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58531.480165385045!2d-46.76903399999997!3d-23.524677999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ceff18e58f42d5%3A0xe92e8bfa062e4d17!2snada!5e0!3m2!1sen!2sus!4v1439065592511" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
-</div>
+    <iframe id="mapFrame" src="" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <!-- mesmerize -->
