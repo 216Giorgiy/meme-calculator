@@ -27,7 +27,7 @@
     document.getElementById("img").src = args["img"];
     document.getElementById("title").innerText = args["title"];
 
-    //Open Graph
+    //Facebook
     function og(p, c) {
       var a = document.createAttribute("property");
       a.value = p;
@@ -42,6 +42,12 @@
     og("og:url", window.location.href);
     og("og:title", args["title"]);
     og("og:image", args["img"]);
+
+    var datahref = document.createAttribute("data-href");
+    datahref.value = window.location.href;
+    document.getElementsByClassName("fb-share-button")[0].setAttributeNode(datahref);
+
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
   });
 </script>
 <meta property="og:type"          content="website" />
@@ -59,9 +65,10 @@
   <div><img id="img" style="max-width: 100%;display:block;margin-left:auto;margin-right:auto"></img></div>
   <div id="title" style="font-size: 10vw; text-align: center"></div>
 <p>
-<div class="fb-share-button" data-href="http://alfredmyers.github.io/meme-calculator/card.html?img=http://i.telegraph.co.uk/multimedia/archive/03090/suzane-von-richtho_3090791b.jpg&amp;title=Feliz%20dia%20dos%20pais!" data-layout="button"></div>
+  <div id="share">
+<div class="fb-share-button" data-layout="button"></div>
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
 <p>
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
