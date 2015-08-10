@@ -22,63 +22,18 @@
   <!-- End Google Analytics -->
   <script type="text/javascript">
   window.addEventListener("load", function() {
-    "use strict";
-    var queryString = decodeURIComponent(location.search.substring(1)).split("&");
-    var args = {};
-    queryString.forEach(function(x) {
-      var pos = x.indexOf("=");
-      args[x.substring(0, pos)] = x.substring(pos + 1);
-    });
+    document.querySelector(".fb-share-button").setAttribute("data-href", window.location.href);
 
-    document.title = args["team1"] + " x " + args["team2"];
-
-    var gamesSince = (Date.now() - new Date(args["start"])) / (parseInt(args["duration"]) * 1000);
-
-    document.getElementById("text").appendChild(document.createTextNode(args["text"].replace("+", " ")));
-
-    if ("flag1" in args) {
-      var img = document.createElement("img");
-      img.src = args["flag1"];
-      img.width = 32;
-      document.getElementById("flag1").appendChild(img);
-    }
-    document.getElementById("team1").appendChild(document.createTextNode(args["team1"]));
-    document.getElementById("currentScore1").appendChild(document.createTextNode(Math.floor(parseInt(args["score1"]) * gamesSince)));
-
-    if ("flag2" in args) {
-      var img = document.createElement("img");
-      img.src = args["flag2"];
-      img.width = 32;
-      document.getElementById("flag2").appendChild(img);
-    }
-    document.getElementById("team2").appendChild(document.createTextNode(args["team2"]));
-    document.getElementById("currentScore2").appendChild(document.createTextNode(Math.floor(parseInt(args["score2"]) * gamesSince)));
-
-    //Facebook
-    function og(p, c) {
-      var a = document.createAttribute("property");
-      a.value = p;
-
-      var m = document.createElement("meta");
-      m.setAttributeNode(a);
-      m.content = c;
-
-      document.head.appendChild(m);
-    }
-
-    og("og:url", window.location.href);
-    og("og:title", document.title);
-    og("og:image", args["flag1"]);
-
-    var datahref = document.createAttribute("data-href");
-    datahref.value = window.location.href;
-    document.getElementsByClassName("fb-share-button")[0].setAttributeNode(datahref);
-
-        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    //Twitter
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
   });
   </script>
-  <meta property="og:type"          content="website" />
-  <meta property="og:description"   content="E se o jogo ainda estivesse rolando..." />
+  <title>Soccer</title>
+  <meta property="og:url"         content="" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="" />
+  <meta property="og:description" content="E se o jogo ainda estivesse rolando..." />
+  <meta property="og:image"       content="" />
 </head>
 <body>
   <div id="fb-root"></div>
@@ -91,19 +46,54 @@
   }(document, 'script', 'facebook-jssdk'));</script>
 
   <p id="text">
-  <p>
+  <p></p>
     <table><tbody>
-      <tr><td id="flag1"></td><td id="team1" style="text-align:center"></td><td id="currentScore1" style="text-align:right"></td></tr>
+      <tr><td><img id="flag1" width="32" src="#" alt="flag"></td><td id="team1" style="text-align:center"></td><td id="currentScore1" style="text-align:right"></td></tr>
       <tr><td colspan="3" style="text-align:center">X</td></tr>
-      <tr><td id="flag2"></td><td id="team2" style="text-align:center"></td><td id="currentScore2" style="text-align:right"></td></tr>
+      <tr><td><img id="flag2" width="32" src="#" alt="flag"></td><td id="team2" style="text-align:center"></td><td id="currentScore2" style="text-align:right"></td></tr>
     </tbody></table>
 
-<p>
+<p></p>
   <div id="share">
 <div class="fb-share-button" data-layout="button"></div>
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
 </div>
-<p>
+<p></p>
+<script>
+(function() {
+  "use strict";
+  var queryString = decodeURIComponent(location.search.substring(1)).split("&");
+  var args = {};
+  queryString.forEach(function(x) {
+    var pos = x.indexOf("=");
+    args[x.substring(0, pos)] = x.substring(pos + 1);
+  });
+
+  document.title = args["team1"] + " x " + args["team2"];
+
+  var gamesSince = (Date.now() - new Date(args["start"])) / (parseInt(args["duration"]) * 1000);
+
+  document.getElementById("text").textContent = args["text"].replace("+", " ");
+
+  if ("flag1" in args) {
+    document.getElementById("flag1").src = args["flag1"];
+  }
+  document.getElementById("team1").textContent = args["team1"];
+  document.getElementById("currentScore1").textContent = Math.floor(parseInt(args["score1"]) * gamesSince);
+
+  if ("flag2" in args) {
+    document.getElementById("flag2").src = args["flag2"];
+  }
+  document.getElementById("team2").textContent = args["team2"];
+  document.getElementById("currentScore2").textContent = Math.floor(parseInt(args["score2"]) * gamesSince);
+
+  //Facebook
+  document.querySelector("meta[property='og:url']").content = window.location.href;
+  document.querySelector("meta[property='og:title']").content = document.title;
+  document.querySelector("meta[property='og:image']").content = args["flag1"];
+})();
+
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- mesmerize -->
 <ins class="adsbygoogle"
