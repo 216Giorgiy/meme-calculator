@@ -34,7 +34,7 @@
 
     var gamesSince = (Date.now() - new Date(args["start"])) / (parseInt(args["duration"]) * 1000);
 
-    document.getElementById("text").appendChild(document.createTextNode(args["text"]));
+    document.getElementById("text").appendChild(document.createTextNode(args["text"].replace("+", " ")));
 
     if ("flag1" in args) {
       var img = document.createElement("img");
@@ -67,8 +67,8 @@
     }
 
     og("og:url", window.location.href);
-    og("og:title", args["title"]);
-    og("og:image", args["img"]);
+    og("og:title", document.title);
+    og("og:image", args["flag1"]);
 
     var datahref = document.createAttribute("data-href");
     datahref.value = window.location.href;
