@@ -75,17 +75,13 @@
 
   document.getElementById("text").textContent = args["text"].replace("+", " ");
 
-  if ("flag1" in args) {
-    document.getElementById("flag1").src = args["flag1"];
+  for (var i = 1; i <= 2; i++) {
+    if ("flag" + i in args) {
+      document.getElementById("flag" + i).src = args["flag" + i];
+    }
+    document.getElementById("team" + i).textContent = args["team" + i];
+    document.getElementById("currentScore" + i).textContent = Math.floor(parseInt(args["score" + i]) * gamesSince);
   }
-  document.getElementById("team1").textContent = args["team1"];
-  document.getElementById("currentScore1").textContent = Math.floor(parseInt(args["score1"]) * gamesSince);
-
-  if ("flag2" in args) {
-    document.getElementById("flag2").src = args["flag2"];
-  }
-  document.getElementById("team2").textContent = args["team2"];
-  document.getElementById("currentScore2").textContent = Math.floor(parseInt(args["score2"]) * gamesSince);
 
   //Facebook
   document.querySelector("meta[property='og:url']").content = window.location.href;
