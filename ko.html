@@ -37,11 +37,6 @@
     text = text.replace("{" + p + "}", args[p]);
   }
   document.getElementById("text").innerText = text;
-
-  window.setTimeout(
-    function() { document.location.reload();},
-    duracaoEmMilissegundos - milissegundosDesde % duracaoEmMilissegundos
-  );
 })();
 </script>
 <p>
@@ -55,6 +50,4 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
-<iframe name="bell" width="0" height="0" src="https://www.youtube.com/embed/TZxh5-OaWmg?autoplay=1" frameborder="0" allowfullscreen></iframe>
 </body></html>
