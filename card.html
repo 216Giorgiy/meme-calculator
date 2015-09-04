@@ -25,33 +25,23 @@
     });
     document.title = args["title"];
     document.getElementById("img").src = args["img"];
-    document.getElementById("title").innerText = args["title"];
+    document.getElementById("title").textContent = args["title"];
 
     //Facebook
-    function og(p, c) {
-      var a = document.createAttribute("property");
-      a.value = p;
+    document.querySelector("meta[property='og:url']").textContent = location.href;
+    document.querySelector("meta[property='og:title']").textContent = args["title"];
+    document.querySelector("meta[property='og:image']").textContent = args["img"];
 
-      var m = document.createElement("meta");
-      m.setAttributeNode(a);
-      m.content = c;
-
-      document.head.appendChild(m);
-    }
-
-    og("og:url", window.location.href);
-    og("og:title", args["title"]);
-    og("og:image", args["img"]);
-
-    var datahref = document.createAttribute("data-href");
-    datahref.value = window.location.href;
-    document.getElementsByClassName("fb-share-button")[0].setAttributeNode(datahref);
+    document.querySelector(".fb-share-button").dataset.href = location.href;
 
     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
   });
 </script>
 <meta property="og:type"          content="website" />
 <meta property="og:description"   content="Um cartão especial para um dia especial" />
+<meta property="og:url"           content="" />
+<meta property="og:title"         content="" />
+<meta property="og:image"         content="" />
 </head>
 <body>
   <div id="fb-root"></div>

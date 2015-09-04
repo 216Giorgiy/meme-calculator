@@ -20,14 +20,7 @@
 }
   </script>
   <!-- End Google Analytics -->
-  <script type="text/javascript">
-  window.addEventListener("load", function() {
-    document.querySelector(".fb-share-button").setAttribute("data-href", window.location.href);
 
-    //Twitter
-    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-  });
-  </script>
   <title>Soccer</title>
   <meta property="og:url"         content="" />
   <meta property="og:type"        content="website" />
@@ -87,8 +80,12 @@
   document.querySelector("meta[property='og:url']").content = window.location.href;
   document.querySelector("meta[property='og:title']").content = document.title;
   document.querySelector("meta[property='og:image']").content = args["flag1"];
+  document.querySelector(".fb-share-button").dataset.href = location.href;
 })();
 
+</script>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- mesmerize -->

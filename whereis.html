@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Google Analytics -->
-  <script>
+  <!-- <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -11,7 +11,7 @@
 
       ga('create', 'UA-61202332-9', 'auto');
       ga('send', 'pageview');
-  </script>
+  </script> -->
   <!-- End Google Analytics -->
 
   <script>window.twttr = (function(d, s, id) {
@@ -61,6 +61,10 @@
       }
     }
 
+    // Embed seems not to be the way to go as I haven't found a way to program against it. Take a look into it and if it is not possible
+    // create the map programaticaly as in https://developers.google.com/maps/tutorials/fundamentals/adding-a-google-map
+    // You're probably having to take a look into the Location API, but that's OK.
+
     document.getElementById("mapFrame").src = "https://www.google.com/maps/embed?pb=" + args["pb"];
   });
 </script>
@@ -74,13 +78,13 @@
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <!-- mesmerize -->
-  <ins class="adsbygoogle"
+  <!-- <ins class="adsbygoogle"
        style="display:block"
        data-ad-client="ca-pub-9738054874581170"
        data-ad-slot="6051521243"
        data-ad-format="auto"></ins>
   <script>
   (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  </script> -->
 </body>
 </html>
